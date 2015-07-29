@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	for applicant in theData
+		h1 #{applicant.name}
+		p #{applicant.bio}
+		p #{applicant.skills}
+		p #{applicant.years}
+		p #{applicant.why}

@@ -41,14 +41,32 @@ app.post('/applicant', function(req, res){
 
 	var newApplicant = new Applicant(applicant);
 
-	var data = Applicant.find({})
+	newApplicant.save();;
 
-	res.render('applicants', data);
+	res.redirect('/applicants')
 
-	// newApplicant.save(function(err, doc){
-	// 	res.render('successful');
-	// });
+});
 
+app.get('/applicants', function(req, res){
+
+	Applicant.find({}, function(err, data){
+
+		res.render('applicants', {theData : data});
+
+	})
+
+	// console.log(data)
+})
+
+app.get('/:userid', function(req, res){
+
+	var theId = req.params.userid;
+
+	Applicant.find({'_id': theId}, function(err, data){
+
+		res.render('application', {theData: data})
+		
+	});
 });
 
 var server = app.listen(8441, function() {
